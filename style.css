@@ -1,0 +1,985 @@
+/* ============================
+   CONFIGURAÇÕES GERAIS
+============================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --verde: #087638;
+    --verde-escuro: #00632e;
+    --verde-claro: #eaf3ed;
+    --vermelho: #e5252b;
+    --branco: #ffffff;
+    --cinza: #f5f7f6;
+    --texto: #252525;
+    --cinza-texto: #656565;
+    --borda: #e1e5e2;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cinza);
+    color: var(--texto);
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    opacity: 0.88;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ============================
+   1. TELA DE LOGIN
+============================ */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f8f9f8;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-page::before {
+    content: "";
+    width: 100%;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--verde);
+}
+
+.login-header {
+    text-align: center;
+    margin-top: 70px;
+    padding: 25px;
+    z-index: 1;
+}
+
+.logo {
+    margin-bottom: 35px;
+}
+
+.logo-symbol {
+    width: 100px;
+    margin: 0 auto 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    gap: 5px;
+}
+
+.logo-symbol span {
+    width: 30px;
+    height: 30px;
+    background: var(--verde);
+    border-radius: 5px;
+}
+
+.logo-symbol .red-dot {
+    background: var(--vermelho);
+    border-radius: 50%;
+}
+
+.logo h2 {
+    font-size: 27px;
+    font-weight: 700;
+    color: #111;
+}
+
+.logo p {
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+.login-header > h1 {
+    font-size: 64px;
+    color: var(--verde);
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.login-header > p {
+    font-size: 22px;
+    color: #454545;
+}
+
+.login-card {
+    width: min(740px, 90%);
+    padding: 45px 50px;
+    margin: 45px auto 80px;
+    background: var(--branco);
+    border-radius: 28px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    z-index: 1;
+}
+
+.login-card h2 {
+    font-size: 48px;
+    margin-bottom: 45px;
+    color: #111;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.login-card input {
+    width: 100%;
+    height: 88px;
+    padding: 0 28px;
+    border: 2px solid #c9c9c9;
+    border-radius: 18px;
+    font-size: 24px;
+    outline: none;
+    background: #fff;
+}
+
+.login-card input:focus {
+    border-color: var(--verde);
+    box-shadow: 0 0 0 3px rgba(8, 118, 56, 0.1);
+}
+
+.login-card input::placeholder {
+    color: #777;
+}
+
+.login-card button {
+    width: 100%;
+    height: 80px;
+    background: var(--verde);
+    border: none;
+    border-radius: 18px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.login-card > a {
+    display: inline-block;
+    margin-top: 35px;
+    color: var(--verde);
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-card > a:hover {
+    text-decoration: underline;
+}
+
+.login-footer {
+    width: 100%;
+    margin-top: auto;
+    padding: 30px 15px;
+    text-align: center;
+    background: var(--verde);
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+/* ============================
+   2. ESTRUTURA DAS TELAS
+============================ */
+
+.dashboard {
+    min-height: 100vh;
+    display: flex;
+    background: #f0f3f1;
+}
+
+.sidebar {
+    width: 350px;
+    min-width: 280px;
+    min-height: 100vh;
+    background: #fff;
+    padding: 65px 35px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    margin-bottom: 55px;
+    padding: 0 15px;
+}
+
+.sidebar-logo h2 {
+    font-size: 44px;
+    color: var(--verde);
+    margin-bottom: 8px;
+}
+
+.sidebar-logo p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar nav button {
+    width: 100%;
+    padding: 18px 16px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    text-align: left;
+    font-size: 18px;
+    color: #333;
+}
+
+.sidebar nav button:hover,
+.sidebar nav button.active {
+    background: var(--verde-claro);
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.support {
+    margin-top: auto;
+    padding: 25px 15px;
+    font-size: 15px;
+}
+
+.support strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.support p {
+    color: var(--verde);
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+    padding: 40px;
+    background: linear-gradient(135deg, #087638, #005c2b);
+}
+
+.screen {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    padding: 35px;
+    background: #fff;
+    border-radius: 22px;
+}
+
+.page-heading {
+    text-align: center;
+    margin-bottom: 25px;
+    position: relative;
+    padding: 15px 0;
+}
+
+.page-heading h1 {
+    font-size: 44px;
+    color: var(--verde);
+    margin-bottom: 12px;
+}
+
+.page-heading > p {
+    font-size: 18px;
+    color: #555;
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    color: var(--verde);
+    font-size: 18px;
+}
+
+
+/* ============================
+   3. TELA DE RESULTADO
+============================ */
+
+.stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 25px;
+    background: #f0f6f3;
+    border-radius: 16px;
+    margin-bottom: 22px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 130px;
+    padding: 10px;
+    border-right: 1px solid #d9dfdb;
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat h2,
+.stat h3 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.stat p {
+    font-size: 15px;
+    color: #555;
+}
+
+.main-stat {
+    flex: 1.5;
+}
+
+.main-stat h2 {
+    font-size: 44px;
+    color: var(--verde);
+}
+
+.main-stat p {
+    font-size: 18px;
+}
+
+.circle {
+    width: 95px;
+    height: 95px;
+    border: 12px solid var(--verde);
+    border-top-color: #cbd2ce;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    font-size: 1px;
+    flex-shrink: 0;
+}
+
+.icon {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.correct {
+    background: #138444;
+}
+
+.wrong {
+    background: var(--vermelho);
+}
+
+.unanswered {
+    background: #858b88;
+}
+
+.info-bar {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 0.9fr;
+    gap: 20px;
+    padding: 18px;
+    margin-bottom: 22px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+}
+
+.info-bar > div {
+    padding: 0 15px;
+    border-right: 1px solid var(--borda);
+}
+
+.info-bar > div:last-child {
+    border-right: none;
+}
+
+.info-bar strong {
+    font-size: 14px;
+    font-weight: normal;
+    color: #555;
+}
+
+.info-bar p {
+    margin-top: 7px;
+    font-size: 17px;
+}
+
+.section-title {
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.questions {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 22px 30px;
+    padding: 25px;
+    background: #fbfcfb;
+    border: 1px solid var(--borda);
+    border-radius: 13px;
+}
+
+.question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.answer {
+    width: 39px;
+    height: 39px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.green {
+    background: #138444;
+}
+
+.red {
+    background: var(--vermelho);
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 18px 22px;
+    margin-top: 15px;
+    background: #eff6f2;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.bottom-buttons {
+    display: flex;
+    gap: 25px;
+    margin-top: 18px;
+}
+
+.bottom-buttons button {
+    flex: 1;
+    min-height: 58px;
+    padding: 14px;
+    border: 1px solid var(--verde);
+    border-radius: 10px;
+    background: var(--verde);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.bottom-buttons .outline {
+    background: white;
+    color: var(--verde);
+}
+
+
+/* ============================
+   4. TELA DE RANKING
+============================ */
+
+#ranking {
+    padding: 35px 40px;
+}
+
+#ranking .page-heading {
+    margin-bottom: 25px;
+}
+
+#ranking .page-heading h1 {
+    font-size: 44px;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.ranking-table thead {
+    background: #eaf3ed;
+}
+
+.ranking-table th {
+    padding: 18px 12px;
+    text-align: center;
+    color: var(--verde);
+    font-size: 15px;
+}
+
+.ranking-table th:first-child {
+    border-radius: 12px 0 0 12px;
+}
+
+.ranking-table th:last-child {
+    border-radius: 0 12px 12px 0;
+}
+
+.ranking-table td {
+    padding: 15px 12px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #e9ecea;
+    border-bottom: 1px solid #e9ecea;
+    font-size: 15px;
+}
+
+.ranking-table td:first-child {
+    border-left: 1px solid #e9ecea;
+    border-radius: 12px 0 0 12px;
+}
+
+.ranking-table td:last-child {
+    border-right: 1px solid #e9ecea;
+    border-radius: 0 12px 12px 0;
+}
+
+.ranking-table tbody tr:hover td {
+    background: #f2f8f4;
+}
+
+.medal {
+    font-size: 25px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e1efe6;
+    border-radius: 50%;
+    color: var(--verde);
+    font-size: 22px;
+}
+
+.ranking-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 30px;
+    padding: 22px;
+    background: #eaf3ed;
+    border-radius: 12px;
+    color: var(--verde);
+    font-size: 15px;
+}
+
+.ranking-footer strong {
+    font-weight: bold;
+}
+
+
+/* ============================
+   5. TELA DE GABARITO
+============================ */
+
+#gabarito .questions {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+#gabarito .answer {
+    background: var(--verde);
+}
+
+
+/* ============================
+   6. TELA INICIAL
+============================ */
+
+#inicio h1 {
+    font-size: 36px;
+    color: var(--verde);
+    margin-bottom: 15px;
+}
+
+#inicio > p {
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.card {
+    padding: 30px;
+    border: 1px solid var(--borda);
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.card h3 {
+    color: var(--verde);
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.card button {
+    padding: 13px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--verde);
+    color: white;
+    font-weight: bold;
+}
+
+
+/* ============================
+   7. RESPONSIVIDADE
+============================ */
+
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 250px;
+        min-width: 220px;
+        padding: 35px 20px;
+    }
+
+    .content {
+        padding: 25px;
+    }
+
+    .screen {
+        padding: 25px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat {
+        min-width: 110px;
+    }
+
+    .main-stat h2 {
+        font-size: 34px;
+    }
+
+    .circle {
+        width: 75px;
+        height: 75px;
+        border-width: 9px;
+    }
+
+    .questions {
+        gap: 20px 10px;
+        padding: 18px;
+    }
+
+    .question {
+        gap: 10px;
+    }
+
+    .answer {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 20px;
+    }
+
+    .sidebar-logo h2 {
+        font-size: 30px;
+    }
+
+    .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .sidebar nav button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    .support {
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .screen {
+        min-height: auto;
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+
+    .page-heading {
+        padding-top: 45px;
+    }
+
+    .page-heading h1 {
+        font-size: 32px;
+    }
+
+    .page-heading > p {
+        font-size: 15px;
+    }
+
+    .back {
+        font-size: 15px;
+    }
+
+    .stats {
+        justify-content: center;
+        padding: 15px 8px;
+    }
+
+    .stat {
+        flex: 1 1 40%;
+        border-right: none;
+        border-bottom: 1px solid #d9dfdb;
+        padding: 12px 5px;
+    }
+
+    .stat:nth-last-child(-n + 2) {
+        border-bottom: none;
+    }
+
+    .main-stat {
+        flex: 1 1 100%;
+    }
+
+    .main-stat h2 {
+        font-size: 35px;
+    }
+
+    .info-bar {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .info-bar > div {
+        padding: 10px;
+        border-right: none;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    .info-bar > div:last-child {
+        border-bottom: none;
+    }
+
+    .questions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+        padding: 15px 8px;
+    }
+
+    .question {
+        gap: 10px;
+        font-size: 15px;
+    }
+
+    .answer {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .legend {
+        gap: 12px;
+        font-size: 12px;
+        padding: 15px 10px;
+    }
+
+    .bottom-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .bottom-buttons button {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    #ranking {
+        padding: 20px 10px;
+        overflow-x: auto;
+    }
+
+    .ranking-table {
+        min-width: 650px;
+    }
+
+    .ranking-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 13px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .login-header {
+        margin-top: 45px;
+        padding: 15px;
+    }
+
+    .logo h2 {
+        font-size: 22px;
+    }
+
+    .logo p {
+        font-size: 18px;
+    }
+
+    .login-header > h1 {
+        font-size: 45px;
+    }
+
+    .login-header > p {
+        font-size: 16px;
+    }
+
+    .login-card {
+        width: 92%;
+        padding: 30px 20px;
+        margin: 20px auto 40px;
+        border-radius: 20px;
+    }
+
+    .login-card h2 {
+        font-size: 35px;
+        margin-bottom: 30px;
+    }
+
+    .login-card form {
+        gap: 18px;
+    }
+
+    .login-card input {
+        height: 65px;
+        padding: 0 15px;
+        font-size: 17px;
+        border-radius: 12px;
+    }
+
+    .login-card button {
+        height: 65px;
+        font-size: 22px;
+        border-radius: 12px;
+    }
+
+    .login-card > a {
+        font-size: 17px;
+        margin-top: 25px;
+    }
+
+    .login-footer {
+        padding: 22px 10px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 380px) {
+    .questions {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 5px;
+    }
+
+    .question {
+        gap: 6px;
+        font-size: 13px;
+    }
+
+    .answer {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+
+    .stat {
+        min-width: 100px;
+    }
+
+    .icon {
+        width: 34px;
+        height: 34px;
+        font-size: 22px;
+    }
+  }
