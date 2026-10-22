@@ -1,7 +1,6 @@
 /* ========================================
    1. FONTES E VARIÁVEIS
 ======================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -15,30 +14,24 @@
     --panel: #f1f6f3;
 }
 
-
 /* ========================================
    2. CONFIGURAÇÕES GERAIS
 ======================================== */
-
 * {
     box-sizing: border-box;
-}
-
-html {
-    min-height: 100%;
-    scroll-behavior: smooth;
-}
-
-body {
     margin: 0;
-    font-family: Inter, Arial, sans-serif;
+    padding: 0;
+}
+
+html, body {
+    min-height: 100vh;
+    font-family: 'Inter', Arial, sans-serif;
     color: var(--ink);
     background: #f7f9f7;
+    overflow-x: hidden;
 }
 
-button,
-input,
-select {
+button, input, select {
     font: inherit;
 }
 
@@ -46,116 +39,70 @@ button {
     cursor: pointer;
 }
 
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-a:focus-visible {
-    outline: 3px solid #78b895;
-    outline-offset: 2px;
-}
-
 .hidden {
     display: none !important;
 }
 
-
 /* ========================================
    3. TELA DE LOGIN
 ======================================== */
-
 .login-page {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px 16px 80px;
     position: relative;
-    padding: 36px 20px 90px;
-    overflow: hidden;
-    background: linear-gradient(180deg, #fff 0%, #f4f8f5 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f8f5 100%);
 }
-
-.login-page:before,
-.login-page:after {
-    content: "";
-    position: absolute;
-    width: 170px;
-    height: 170px;
-    opacity: .65;
-    background:
-        repeating-linear-gradient(0deg, transparent 0 52px, #e4eee7 52px 102px),
-        repeating-linear-gradient(90deg, transparent 0 52px, #e4eee7 52px 102px);
-    border-radius: 20px;
-    pointer-events: none;
-}
-
-.login-page:before {
-    top: 8%;
-    left: -105px;
-}
-
-.login-page:after {
-    bottom: 12%;
-    right: -95px;
-}
-
-
-/* ========================================
-   4. CABEÇALHO E IDENTIDADE VISUAL
-======================================== */
 
 .login-header {
     text-align: center;
+    margin-bottom: 24px;
     z-index: 1;
-    margin-bottom: 38px;
 }
 
 .brand-lockup {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 18px;
-    margin-bottom: 28px;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 .if-symbol {
-    width: 76px;
-    height: 84px;
+    width: 58px;
+    height: 64px;
     display: grid;
-    grid-template-columns: repeat(3, 22px);
-    grid-auto-rows: 22px;
-    gap: 4px;
+    grid-template-columns: repeat(3, 16px);
+    grid-auto-rows: 16px;
+    gap: 3px;
     position: relative;
 }
 
 .if-symbol i {
     display: block;
     background: #16823e;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 .if-symbol i:nth-of-type(4),
 .if-symbol i:nth-of-type(7),
-.if-symbol i:nth-of-type(10) {
-    grid-column: 1;
-}
+.if-symbol i:nth-of-type(10) { grid-column: 1; }
 
 .if-symbol i:nth-of-type(5),
 .if-symbol i:nth-of-type(8),
-.if-symbol i:nth-of-type(11) {
-    grid-column: 2;
-}
+.if-symbol i:nth-of-type(11) { grid-column: 2; }
 
-.if-symbol i:nth-of-type(6) {
-    grid-column: 3;
-}
+.if-symbol i:nth-of-type(6) { grid-column: 3; }
 
 .if-symbol .red-dot {
     position: absolute;
     left: 0;
     top: 0;
-    width: 22px;
-    height: 22px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: #d9272e;
 }
@@ -168,18 +115,18 @@ a:focus-visible {
 }
 
 .if-wordmark strong {
-    font-size: 22px;
-    line-height: 1.12;
-    letter-spacing: -.7px;
+    font-size: 16px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
 }
 
 .if-wordmark span {
-    font-size: 20px;
-    margin-top: 4px;
+    font-size: 14px;
+    margin-top: 2px;
 }
 
 .brand-title h1 {
-    font-size: clamp(44px, 7vw, 66px);
+    font-size: 38px;
     letter-spacing: 1px;
     color: var(--green);
     margin: 0;
@@ -187,91 +134,83 @@ a:focus-visible {
 }
 
 .brand-title p {
-    font-size: clamp(15px, 2.4vw, 22px);
-    margin: 10px 0;
+    font-size: 14px;
+    margin: 6px 0 0;
     color: #454b47;
 }
 
-
 /* ========================================
-   5. CARTÃO DE LOGIN
+   4. CARTÃO DE LOGIN
 ======================================== */
-
 .login-card {
     z-index: 1;
-    width: min(100%, 600px);
-    padding: 38px 42px 32px;
-    background: #fff;
+    width: 100%;
+    max-width: 440px;
+    padding: 28px 20px 24px;
+    background: #ffffff;
     border: 1px solid #edf0ee;
-    border-radius: 25px;
-    box-shadow: 0 16px 42px #173c2714;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(23, 60, 39, 0.08);
     text-align: center;
 }
 
 .login-card h2 {
-    font-size: 38px;
-    margin: 0 0 30px;
+    font-size: 26px;
+    margin-bottom: 22px;
     color: #151815;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .user-outline {
     color: var(--green);
-    font-size: 43px;
-    vertical-align: middle;
-    margin-right: 12px;
+    font-size: 30px;
 }
 
-
 /* ========================================
-   6. CAMPOS E BOTÕES
+   5. CAMPOS E BOTÕES
 ======================================== */
-
 .field {
     display: flex;
     align-items: center;
-    gap: 14px;
-    height: 64px;
+    gap: 10px;
+    height: 52px;
     border: 1.5px solid #b7bdb9;
-    border-radius: 13px;
-    padding: 0 18px;
-    margin-bottom: 18px;
-    text-align: left;
+    border-radius: 12px;
+    padding: 0 14px;
+    margin-bottom: 14px;
+    background: #fff;
 }
 
 .field > span {
-    font-size: 24px;
-    color: #292e2b;
+    display: none; /* Oculta o ícone extra repetido */
 }
 
 .field input {
     width: 100%;
-    min-width: 0;
     border: 0;
     outline: none;
     background: transparent;
-    font-size: 18px;
+    font-size: 15px;
     color: #242824;
-}
-
-.field input::placeholder {
-    color: #747a76;
 }
 
 .eye {
     border: 0;
     background: transparent;
-    font-size: 23px;
-    color: #222;
+    font-size: 18px;
+    color: #555;
+    padding: 4px;
 }
 
-.primary,
-.outline {
+.primary, .outline {
     min-height: 48px;
     padding: 12px 18px;
-    border-radius: 9px;
+    border-radius: 10px;
     border: 1px solid var(--green);
     font-weight: 600;
-    transition: filter .15s, transform .15s;
 }
 
 .primary {
@@ -284,154 +223,79 @@ a:focus-visible {
     color: var(--green);
 }
 
-.primary:hover,
-.outline:hover {
-    filter: brightness(.96);
-}
-
-.primary:active,
-.outline:active {
-    transform: scale(.99);
-}
-
 .login-submit {
     width: 100%;
-    font-size: 20px;
-    margin: 5px 0 24px;
-    min-height: 60px;
+    font-size: 17px;
+    margin: 8px 0 16px;
 }
 
 .login-card > a {
     color: var(--green);
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 600;
     text-decoration: none;
-}
-
-.login-card > a:hover {
-    text-decoration: underline;
 }
 
 .message {
     min-height: 20px;
     color: var(--red);
     font-size: 13px;
-    margin: 12px 0 0;
+    margin-top: 10px;
 }
 
-
 /* ========================================
-   7. RODAPÉ DO LOGIN
+   6. RODAPÉ DO LOGIN
 ======================================== */
-
 .login-footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
-    right: 0;
+    width: 100%;
     background: var(--green);
     color: white;
     text-align: center;
-    padding: 23px 12px;
-    font-size: 16px;
+    padding: 14px 10px;
+    font-size: 13px;
     font-weight: 600;
-    z-index: 1;
+    z-index: 10;
 }
 
-
 /* ========================================
-   8. ESTRUTURA DO PAINEL PRINCIPAL
+   7. PAINEL PRINCIPAL
 ======================================== */
-
 .dashboard {
     min-height: 100vh;
     display: flex;
 }
 
-
-/* ========================================
-   9. MENU LATERAL
-======================================== */
-
 .sidebar {
-    width: 300px;
+    width: 260px;
     flex-shrink: 0;
     background: #fff;
-    padding: 36px 25px 28px;
+    padding: 24px 18px;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     border-right: 1px solid #edf0ed;
 }
-
-.sidebar-brand {
-    padding: 0 10px 30px;
-    border-bottom: 1px solid #e2e8e3;
-}
-
-.if-symbol.small {
-    width: 62px;
-    height: 68px;
-    grid-template-columns: repeat(3, 18px);
-    grid-auto-rows: 18px;
-    gap: 3px;
-    margin-bottom: 14px;
-}
-
-.if-symbol.small .red-dot {
-    width: 18px;
-    height: 18px;
-}
-
-.sidebar .if-wordmark strong {
-    font-size: 17px;
-}
-
-.sidebar .if-wordmark span {
-    font-size: 16px;
-}
-
-.side-ifsaber {
-    font-size: 29px;
-    font-weight: 800;
-    color: var(--green);
-    margin-top: 24px;
-    letter-spacing: -.8px;
-}
-
-.sidebar-brand > p {
-    font-size: 12px;
-    color: var(--muted);
-    margin: 4px 0 0;
-}
-
-
-/* ========================================
-   10. NAVEGAÇÃO DO MENU
-======================================== */
 
 .side-nav {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 26px;
+    gap: 6px;
+    margin-top: 20px;
 }
 
 .side-nav button {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     border: 0;
     background: transparent;
     color: #353b37;
-    padding: 14px 16px;
-    border-radius: 11px;
-    text-align: left;
-    font-size: 19px;
-}
-
-.side-nav button span {
+    padding: 12px 14px;
+    border-radius: 8px;
     font-size: 15px;
+    text-align: left;
 }
 
 .side-nav button:hover,
@@ -441,757 +305,29 @@ a:focus-visible {
     font-weight: 700;
 }
 
-
-/* ========================================
-   11. SUPORTE DO MENU LATERAL
-======================================== */
-
-.support {
-    margin-top: auto;
-    padding: 25px 10px 0;
-    font-size: 13px;
-}
-
-.support p {
-    color: var(--green);
-    margin: 7px 0;
-}
-
-
-/* ========================================
-   12. ÁREA DE CONTEÚDO
-======================================== */
-
 .content {
     flex: 1;
-    min-width: 0;
-    padding: 36px clamp(20px, 4vw, 58px);
+    padding: 24px 16px;
     background: linear-gradient(135deg, #087638 0%, #08612e 100%);
 }
 
 .screen {
-    max-width: 1300px;
+    max-width: 1100px;
     margin: 0 auto;
     background: #fff;
-    border-radius: 20px;
-    padding: 35px clamp(22px, 3vw, 40px);
-    min-height: calc(100vh - 72px);
-    box-shadow: 0 10px 35px #003f1a1c;
-}
-
-
-/* ========================================
-   13. CABEÇALHO DE BOAS-VINDAS
-======================================== */
-
-.welcome-head {
-    padding: 20px 0 30px;
-}
-
-.eyebrow {
-    font-size: 12px;
-    letter-spacing: 1.4px;
-    color: var(--green);
-    font-weight: 700;
-}
-
-.welcome-head h1 {
-    font-size: clamp(28px, 4vw, 42px);
-    margin: 8px 0;
-}
-
-.welcome-head > p:last-child {
-    color: var(--muted);
-}
-
-
-/* ========================================
-   14. CARTÕES DO PAINEL
-======================================== */
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-}
-
-.card {
-    border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 5px 18px #123b1a08;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 24px 18px;
+    min-height: calc(100vh - 48px);
 }
 
-.card-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-    background: var(--green-light);
-    color: var(--green);
-    font-size: 25px;
-}
-
-.card h2 {
-    font-size: 20px;
-    margin: 18px 0 6px;
-}
-
-.card p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.5;
-    min-height: 40px;
-}
-
-.card button {
-    width: 100%;
-    margin-top: 18px;
-}
-
-.pill {
-    font-size: 11px;
-    border-radius: 20px;
-    padding: 7px 10px;
-    background: var(--green-light);
-    color: var(--green);
-    font-weight: 600;
-}
-
-
-/* ========================================
-   15. CABEÇALHO DAS PÁGINAS INTERNAS
-======================================== */
-
-.page-heading {
-    text-align: center;
-    position: relative;
-    padding: 0 0 24px;
-}
-
-.page-heading h1 {
-    color: var(--green);
-    font-size: clamp(28px, 4vw, 39px);
-    margin: 6px 0 8px;
-}
-
-.page-heading > p {
-    color: var(--muted);
-    margin: 0;
-    font-size: 15px;
-}
-
-.back {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: transparent;
-    border: 0;
-    color: var(--green);
-    padding: 6px 0;
-    font-size: 15px;
-}
-
-
-/* ========================================
-   16. ESTATÍSTICAS DO RESULTADO
-======================================== */
-
-.stats {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
-    background: var(--panel);
-    border-radius: 14px;
-    padding: 22px 20px;
-    margin: 0 0 20px;
-    align-items: center;
-}
-
-.stat {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 4px 14px;
-    border-right: 1px solid #d7dfd9;
-}
-
-.stat:last-child {
-    border-right: 0;
-}
-
-.stat h2,
-.stat h3,
-.stat p {
-    margin: 0;
-}
-
-.stat h2 {
-    font-size: 35px;
-    color: var(--green);
-}
-
-.stat h3 {
-    font-size: 22px;
-}
-
-.stat p {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 3px;
-}
-
-.main-stat {
-    justify-content: flex-start;
-}
-
-
-/* ========================================
-   17. GRÁFICO CIRCULAR
-======================================== */
-
-.donut {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: conic-gradient(var(--green) 0 75%, #d6dcd8 75% 100%);
-    position: relative;
-    flex-shrink: 0;
-}
-
-.donut:before {
-    content: "";
-    position: absolute;
-    inset: 9px;
-    border-radius: 50%;
-    background: var(--panel);
-}
-
-.donut span {
-    position: relative;
-    color: var(--green);
-    font-size: 0;
-}
-
-
-/* ========================================
-   18. ÍCONES DE ACERTO E ERRO
-======================================== */
-
-.icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: #fff;
-    font-size: 25px;
-    font-weight: 700;
-    flex-shrink: 0;
-}
-
-.correct {
-    background: #168a4a;
-}
-
-.wrong {
-    background: var(--red);
-}
-
-.unanswered {
-    background: #858b87;
-}
-
-
-/* ========================================
-   19. BARRA DE INFORMAÇÕES
-======================================== */
-
-.info-bar {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 15px 20px;
-    margin: 0 0 23px;
-    gap: 12px;
-}
-
-.info-bar > div {
-    padding: 0 14px;
-    border-right: 1px solid var(--line);
-}
-
-.info-bar > div:first-child {
-    padding-left: 0;
-}
-
-.info-bar > div:last-child {
-    border-right: 0;
-}
-
-.info-bar strong {
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.info-bar p {
-    margin: 5px 0 0 27px;
-    font-size: 14px;
-}
-
-
-/* ========================================
-   20. LISTA DE QUESTÕES
-======================================== */
-
-.section-title {
-    font-size: 22px;
-    margin: 0 0 12px;
-}
-
-.questions {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 14px 20px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 17px 20px;
-}
-
-.question {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4px 8px;
-    font-weight: 500;
-}
-
-.answer {
-    width: 37px;
-    height: 37px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: #fff;
-    font-weight: 600;
-}
-
-.answer.green {
-    background: var(--green);
-}
-
-.answer.red {
-    background: var(--red);
-}
-
-
-/* ========================================
-   21. LEGENDA DOS RESULTADOS
-======================================== */
-
-.legend {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-    background: var(--panel);
-    padding: 14px 18px;
-    border-radius: 10px;
-    margin-top: 14px;
-    color: var(--muted);
-    font-size: 12px;
-    flex-wrap: wrap;
-}
-
-.legend span {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dot {
-    width: 17px;
-    height: 17px;
-    display: inline-block;
-    border-radius: 50%;
-}
-
-.green-bg {
-    background: var(--green);
-}
-
-.red-bg {
-    background: var(--red);
-}
-
-.gray-bg {
-    background: #888f8a;
-}
-
-
-/* ========================================
-   22. BOTÕES INFERIORES
-======================================== */
-
-.bottom-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-    margin-top: 18px;
-}
-
-.bottom-buttons button {
-    min-height: 52px;
-}
-
-
-/* ========================================
-   23. RANKING
-======================================== */
-
-.ranking-heading {
-    padding-bottom: 28px;
-}
-
-.filter {
-    position: absolute;
-    right: 0;
-    top: 0;
-    border-radius: 25px;
-    background: var(--green-light);
-    padding: 10px 14px;
-    color: var(--green);
-}
-
-.filter select {
-    border: 0;
-    background: transparent;
-    color: var(--green);
-    font-weight: 600;
-    outline: none;
-    max-width: 140px;
-}
-
-.table-wrap {
-    overflow-x: auto;
-    border-radius: 12px;
-}
-
-.ranking-table,
-.answer-table {
-    border-collapse: collapse;
-    width: 100%;
-    min-width: 650px;
-    text-align: left;
-}
-
-.ranking-table th {
-    background: var(--green-light);
-    color: #176d3b;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.ranking-table th,
-.ranking-table td,
-.answer-table th,
-.answer-table td {
-    padding: 15px 14px;
-    border-bottom: 1px solid #e8ece9;
-}
-
-.ranking-table td {
-    font-size: 13px;
-}
-
-.ranking-table tbody tr:hover {
-    background: #f8fbf9;
-}
-
-.rank-number {
-    text-align: center;
-    font-weight: 600;
-    width: 70px;
-}
-
-.medal {
-    font-size: 23px;
-}
-
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #d7eadc;
-    color: var(--green);
-    display: inline-grid;
-    place-items: center;
-    margin-right: 10px;
-    font-size: 20px;
-    vertical-align: middle;
-}
-
-.student-name {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.score {
-    font-weight: 600;
-}
-
-.percent {
-    color: var(--green);
-    font-weight: 600;
-}
-
-.row-arrow {
-    color: var(--green);
-    font-size: 24px;
-}
-
-
-/* ========================================
-   24. RODAPÉ DO RANKING
-======================================== */
-
-.ranking-footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    flex-wrap: wrap;
-    background: var(--green-light);
-    color: #54715f;
-    padding: 19px 20px;
-    border-radius: 12px;
-    margin-top: 24px;
-    font-size: 13px;
-}
-
-.ranking-footer strong {
-    color: var(--green);
-}
-
-
-/* ========================================
-   25. TABELA DE RESPOSTAS
-======================================== */
-
-.answer-table {
-    margin-top: 4px;
-}
-
-.answer-table th {
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.answer-table td {
-    text-align: center;
-    font-size: 14px;
-}
-
-.answer-table tr:last-child td {
-    border-bottom: 0;
-}
-
-
-/* ========================================
-   26. STATUS DAS RESPOSTAS
-======================================== */
-
-.status {
-    display: inline-block;
-    padding: 7px 10px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.status.ok {
-    background: #e7f4eb;
-    color: var(--green);
-}
-
-.status.no {
-    background: #fbeaec;
-    color: var(--red);
-}
-
-.wrong-answer {
-    color: var(--red);
-    font-weight: 600;
-}
-
-
-/* ========================================
-   27. RESUMO DAS RESPOSTAS
-======================================== */
-
-.answer-summary {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 18px;
-    margin-top: 22px;
-    text-align: center;
-}
-
-.answer-summary > div:first-child {
-    border-right: 1px solid var(--line);
-}
-
-.answer-summary strong {
-    display: block;
-    color: var(--green);
-    font-size: 25px;
-    margin-top: 5px;
-}
-
-.answer-summary > div:first-child strong {
-    display: inline;
-    color: var(--green);
-    font-size: 22px;
-}
-
-
-/* ========================================
-   28. RESPONSIVIDADE PARA TELAS MÉDIAS
-   Tablets e telas de até 1000px
-======================================== */
-
-@media (max-width: 1000px) {
-
-    .sidebar {
-        width: 235px;
-        padding: 28px 16px;
-    }
-
-    .content {
-        padding: 22px;
-    }
-
-    .screen {
-        padding: 26px 22px;
-    }
-
-    .cards {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-    }
-
-    .stat:nth-child(2) {
-        border-right: 0;
-    }
-
-    .stat:nth-child(3) {
-        border-right: 1px solid #d7dfd9;
-    }
-
-    .main-stat {
-        justify-content: center;
-    }
-
-    .questions {
-        gap: 10px;
-        padding: 14px;
-    }
-
-    .info-bar {
-        padding: 14px 10px;
-    }
-
-    .info-bar > div {
-        padding: 0 8px;
-    }
-}
-
-
-/* ========================================
-   29. RESPONSIVIDADE PARA CELULARES
-   Telas de até 700px
-======================================== */
-
-@media (max-width: 700px) {
-
-    /* Login */
-
-    .login-page {
-        padding: 28px 14px 78px;
-    }
-
-    .brand-lockup {
-        gap: 12px;
-    }
-
-    .if-symbol {
-        transform: scale(.8);
-        transform-origin: right center;
-        width: 62px;
-    }
-
-    .if-wordmark strong {
-        font-size: 16px;
-    }
-
-    .if-wordmark span {
-        font-size: 15px;
-    }
-
-    .brand-title h1 {
-        font-size: 45px;
-    }
-
-    .brand-title p {
-        font-size: 14px;
-    }
-
-    .login-card {
-        padding: 28px 20px;
-        border-radius: 18px;
-    }
-
-    .login-card h2 {
-        font-size: 30px;
-    }
-
-    .field {
-        height: 56px;
-        padding: 0 12px;
-    }
-
-    .field input {
-        font-size: 15px;
-    }
-
-    .login-submit {
-        font-size: 17px;
-    }
-
-    .login-footer {
-        font-size: 12px;
-        padding: 20px 8px;
-    }
-
-
-    /* Estrutura do painel */
-
-        .dashboard {
+@media (max-width: 768px) {
+    .dashboard {
         flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: 0;
+        border-bottom: 1px solid #edf0ed;
     }
 }
