@@ -1,11 +1,11 @@
 /* ========================================
-   1. FONTES E VARIÁVEIS
+   1. FONTES E VARIÁVEIS DA MARCA
 ======================================== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
     --green: #087638;
-    --green-dark: #075d2d;
+    --green-dark: #06592a;
     --green-light: #eaf3ed;
     --red: #d9272e;
     --ink: #202522;
@@ -28,7 +28,6 @@ html, body {
     font-family: 'Inter', Arial, sans-serif;
     color: var(--ink);
     background: #f7f9f7;
-    overflow-x: hidden;
 }
 
 button, input, select {
@@ -52,14 +51,14 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 16px 80px;
-    position: relative;
+    padding: 30px 16px 80px;
     background: linear-gradient(180deg, #ffffff 0%, #f4f8f5 100%);
+    position: relative;
 }
 
 .login-header {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     z-index: 1;
 }
 
@@ -67,17 +66,18 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 14px;
+    margin-bottom: 18px;
 }
 
+/* Símbolo do IF (Quadradinhos + Ponto Vermelho) */
 .if-symbol {
-    width: 58px;
-    height: 64px;
+    width: 60px;
+    height: 66px;
     display: grid;
     grid-template-columns: repeat(3, 16px);
     grid-auto-rows: 16px;
-    gap: 3px;
+    gap: 4px;
     position: relative;
 }
 
@@ -115,18 +115,18 @@ button {
 }
 
 .if-wordmark strong {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.1;
     letter-spacing: -0.5px;
 }
 
 .if-wordmark span {
-    font-size: 14px;
+    font-size: 15px;
     margin-top: 2px;
 }
 
 .brand-title h1 {
-    font-size: 38px;
+    font-size: clamp(36px, 6vw, 54px);
     letter-spacing: 1px;
     color: var(--green);
     margin: 0;
@@ -134,29 +134,27 @@ button {
 }
 
 .brand-title p {
-    font-size: 14px;
+    font-size: clamp(14px, 2.2vw, 18px);
     margin: 6px 0 0;
     color: #454b47;
 }
 
-/* ========================================
-   4. CARTÃO DE LOGIN
-======================================== */
+/* Cartão de Login */
 .login-card {
     z-index: 1;
     width: 100%;
     max-width: 440px;
-    padding: 28px 20px 24px;
+    padding: 32px 24px;
     background: #ffffff;
     border: 1px solid #edf0ee;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(23, 60, 39, 0.08);
+    box-shadow: 0 12px 36px rgba(23, 60, 39, 0.08);
     text-align: center;
 }
 
 .login-card h2 {
-    font-size: 26px;
-    margin-bottom: 22px;
+    font-size: 28px;
+    margin-bottom: 24px;
     color: #151815;
     display: flex;
     align-items: center;
@@ -166,26 +164,26 @@ button {
 
 .user-outline {
     color: var(--green);
-    font-size: 30px;
+    font-size: 32px;
 }
 
-/* ========================================
-   5. CAMPOS E BOTÕES
-======================================== */
+/* Campos de Formulário */
 .field {
     display: flex;
     align-items: center;
     gap: 10px;
-    height: 52px;
+    height: 54px;
     border: 1.5px solid #b7bdb9;
     border-radius: 12px;
     padding: 0 14px;
-    margin-bottom: 14px;
-    background: #fff;
+    margin-bottom: 16px;
+    background: #ffffff;
 }
 
 .field > span {
-    display: none; /* Oculta o ícone extra repetido */
+    font-size: 20px;
+    color: #555;
+    flex-shrink: 0;
 }
 
 .field input {
@@ -205,12 +203,14 @@ button {
     padding: 4px;
 }
 
+/* Botões */
 .primary, .outline {
     min-height: 48px;
     padding: 12px 18px;
     border-radius: 10px;
     border: 1px solid var(--green);
     font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
 }
 
 .primary {
@@ -223,10 +223,15 @@ button {
     color: var(--green);
 }
 
+.primary:active, .outline:active {
+    transform: scale(0.98);
+}
+
 .login-submit {
     width: 100%;
-    font-size: 17px;
-    margin: 8px 0 16px;
+    font-size: 18px;
+    margin: 8px 0 18px;
+    min-height: 52px;
 }
 
 .login-card > a {
@@ -243,9 +248,7 @@ button {
     margin-top: 10px;
 }
 
-/* ========================================
-   6. RODAPÉ DO LOGIN
-======================================== */
+/* Rodapé */
 .login-footer {
     position: fixed;
     bottom: 0;
@@ -261,40 +264,59 @@ button {
 }
 
 /* ========================================
-   7. PAINEL PRINCIPAL
+   4. ESTRUTURA DO PAINEL
 ======================================== */
 .dashboard {
     min-height: 100vh;
     display: flex;
 }
 
+/* Menu Lateral (Sidebar) */
 .sidebar {
-    width: 260px;
+    width: 280px;
     flex-shrink: 0;
-    background: #fff;
-    padding: 24px 18px;
+    background: #ffffff;
+    padding: 28px 20px;
     display: flex;
     flex-direction: column;
     border-right: 1px solid #edf0ed;
 }
 
+.sidebar-brand {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e8e3;
+}
+
+.side-ifsaber {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--green);
+    margin-top: 14px;
+}
+
+.sidebar-brand p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
 .side-nav {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-top: 20px;
+    gap: 8px;
+    margin-top: 24px;
 }
 
 .side-nav button {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     border: 0;
     background: transparent;
     color: #353b37;
-    padding: 12px 14px;
-    border-radius: 8px;
-    font-size: 15px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 16px;
     text-align: left;
 }
 
@@ -305,29 +327,348 @@ button {
     font-weight: 700;
 }
 
+.support {
+    margin-top: auto;
+    padding-top: 20px;
+    font-size: 13px;
+}
+
+.support p {
+    color: var(--green);
+    margin-top: 4px;
+}
+
+/* Área de Conteúdo Principal */
 .content {
     flex: 1;
-    padding: 24px 16px;
+    padding: 30px 24px;
     background: linear-gradient(135deg, #087638 0%, #08612e 100%);
+    min-width: 0;
 }
 
 .screen {
     max-width: 1100px;
     margin: 0 auto;
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px 18px;
-    min-height: calc(100vh - 48px);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px 24px;
+    min-height: calc(100vh - 60px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* ========================================
+   5. TELA INÍCIO (CARDS)
+======================================== */
+.welcome-head {
+    margin-bottom: 24px;
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: var(--green);
+    font-weight: 700;
+}
+
+.welcome-head h1 {
+    font-size: 32px;
+    margin: 6px 0;
+}
+
+.welcome-head p {
+    color: var(--muted);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 22px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin: 14px 0 4px;
+}
+
+.card p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+.card button {
+    width: 100%;
+    margin-top: auto;
+}
+
+.pill {
+    font-size: 11px;
+    border-radius: 12px;
+    padding: 4px 8px;
+    background: var(--green-light);
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* ========================================
+   6. TELAS INTERNAS (RESULTADO / RANKING / GABARITO)
+======================================== */
+.page-heading {
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+}
+
+.page-heading h1 {
+    color: var(--green);
+    font-size: 28px;
+}
+
+.page-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    border: 0;
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Estatísticas */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    background: var(--panel);
+    border-radius: 14px;
+    padding: 18px;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat h2 { font-size: 28px; color: var(--green); }
+.stat h3 { font-size: 20px; }
+.stat p { font-size: 12px; color: var(--muted); }
+
+.donut {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(var(--green) 0 75%, #ccd5ce 75% 100%);
+    position: relative;
+}
+
+.donut:before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: var(--panel);
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 700;
+}
+
+.correct { background: var(--green); }
+.wrong { background: var(--red); }
+.unanswered { background: #888; }
+
+.info-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.info-bar strong { font-size: 12px; }
+.info-bar p { font-size: 14px; margin-top: 2px; }
+
+/* Grid de Questões */
+.questions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.answer {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.answer.green { background: var(--green); }
+.answer.red { background: var(--red); }
+
+/* Legenda */
+.legend {
+    display: flex;
+    gap: 16px;
+    background: var(--panel);
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.legend span { display: flex; align-items: center; gap: 6px; }
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.green-bg { background: var(--green); }
+.red-bg { background: var(--red); }
+.gray-bg { background: #888; }
+
+.bottom-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+/* Tabelas (Ranking e Gabarito) */
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.ranking-table, .answer-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 500px;
+}
+
+.ranking-table th, .answer-table th {
+    background: var(--green-light);
+    color: var(--green);
+    padding: 12px;
+    font-size: 13px;
+}
+
+.ranking-table td, .answer-table td {
+    padding: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+}
+
+.status.ok { color: var(--green); font-weight: 700; }
+.status.no { color: var(--red); font-weight: 700; }
+
+.ranking-footer {
+    display: flex;
+    justify-content: space-between;
+    background: var(--green-light);
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--green);
+}
+
+/* ========================================
+   7. RESPONSIVIDADE PARA CELULAR
+======================================== */
 @media (max-width: 768px) {
     .dashboard {
         flex-direction: column;
     }
+
     .sidebar {
         width: 100%;
-        min-height: auto;
         border-right: 0;
         border-bottom: 1px solid #edf0ed;
+        padding: 16px;
+    }
+
+    .side-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .side-nav button {
+        white-space: nowrap;
+        padding: 8px 12px;
+    }
+
+    .content {
+        padding: 12px;
+    }
+
+    .screen {
+        padding: 16px;
+        min-height: auto;
+    }
+
+    .bottom-buttons {
+        grid-template-columns: 1fr;
     }
 }
