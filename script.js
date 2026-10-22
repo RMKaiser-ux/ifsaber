@@ -1,192 +1,203 @@
-// Dados simulados da aplicação
-const mockRanking = [
-    { pos: 1, nome: "Ramon (IFMA)", turma: "1º ano - A", acertos: 20, pct: "100%" },
-    { pos: 2, nome: "Maria Clara", turma: "1º ano - A", acertos: 19, pct: "95%" },
-    { pos: 3, nome: "João Pedro", turma: "1º ano - B", acertos: 18, pct: "90%" },
-    { pos: 4, nome: "Ana Beatriz", turma: "1º ano - C", acertos: 16, pct: "80%" },
-    { pos: 5, nome: "Carlos Eduardo", turma: "1º ano - A", acertos: 15, pct: "75%" },
-    { pos: 6, nome: "Beatriz Lima", turma: "1º ano - B", acertos: 14, pct: "70%" }
+// ==========================================
+// IFSABER — LÓGICA INTERATIVA (MOCK DINÂMICO)
+// ==========================================
+
+// BANCO DE DADOS DE QUESTÕES (MOCK LOCAL)
+const BANCO_QUESTOES = [
+  { id: 1, pergunta: "1) Qual a solução da equação 2x + 4 = 10?", opcoes: ["a) x = 2", "b) x = 3", "c) x = 4", "d) x = 5"], correta: 1 },
+  { id: 2, pergunta: "2) Resolva: 3x - 5 = 10", opcoes: ["a) x = 3", "b) x = 5", "c) x = 7", "d) x = 15"], correta: 1 },
+  { id: 3, pergunta: "3) Se x/2 = 8, qual o valor de x?", opcoes: ["a) x = 4", "b) x = 10", "c) x = 16", "d) x = 64"], correta: 2 },
+  { id: 4, pergunta: "4) Qual o valor de x em: 5x = 25?", opcoes: ["a) x = 1", "b) x = 5", "c) x = 10", "d) x = 20"], correta: 1 }
 ];
 
-const mockGabarito = [
-    { q: 1, sua: "B", correta: "B", status: "ok" },
-    { q: 2, sua: "C", correta: "C", status: "ok" },
-    { q: 3, sua: "A", correta: "B", status: "no", errada: "A" },
-    { q: 4, sua: "D", correta: "D", status: "ok" },
-    { q: 5, sua: "B", correta: "B", status: "ok" },
-    { q: 6, sua: "A", correta: "A", status: "ok" },
-    { q: 7, sua: "C", correta: "C", status: "ok" },
-    { q: 8, sua: "C", correta: "D", status: "no", errada: "C" },
-    { q: 9, sua: "B", correta: "B", status: "ok" },
-    { q: 10, sua: "C", correta: "C", status: "ok" },
-    { q: 11, sua: "A", correta: "A", status: "ok" },
-    { q: 12, sua: "C", correta: "B", status: "no", errada: "C" },
-    { q: 13, sua: "D", correta: "D", status: "ok" },
-    { q: 14, sua: "C", correta: "C", status: "ok" },
-    { q: 15, sua: "A", correta: "A", status: "ok" },
-    { q: 16, sua: "B", correta: "B", status: "ok" },
-    { q: 17, sua: "C", correta: "C", status: "ok" },
-    { q: 18, sua: "B", correta: "A", status: "no", errada: "B" },
-    { q: 19, sua: "D", correta: "D", status: "ok" },
-    { q: 20, sua: "B", correta: "B", status: "ok" }
-];
+// ESTADO DA APLICAÇÃO
+let usuarioLogado = null;
+let respostasUsuario = {};
 
-// Função de navegação entre telas
-function mostrarTela(screenId) {
-    document.querySelectorAll('.dashboard .screen').forEach(screen => {
-        screen.classList.add('hidden');
+document.addEventListener("DOMContentLoaded", () => {
+  inicializarEventos();
+});
+
+function inicializarEventos() {
+  // 1. LOGIN
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const userVal = document.getElementById("usuario").value.trim();
+      const senhaVal = document.getElementById("senha").value.trim();
+
+      if (userVal && senhaVal) {
+        usuarioLogado = userVal;
+        localStorage.setItem("ifsaber_user", userVal);
+        exibirPainel();
+      } else {
+        document.getElementById("mensagemLogin").innerText = "Preencha todos os campos.";
+      }
     });
-    const target = document.getElementById(screenId);
-    if (target) {
-        target.classList.remove('hidden');
-    }
-    
-    // Atualiza estado ativo no menu
-    document.querySelectorAll('.side-nav button').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-screen') === screenId) {
-            btn.classList.add('active');
-        }
+  }
+
+  // TOGGLE SENHA
+  const toggleBtn = document.getElementById("togglePassword");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      const inputSenha = document.getElementById("senha");
+      if (inputSenha.type === "password") {
+        inputSenha.type = "text";
+      } else {
+        inputSenha.type = "password";
+      }
     });
+  }
+
+  // 2. NAV
+  const navButtons = document.querySelectorAll("[data-screen], [data-goto]");
+  navButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-screen") || btn.getAttribute("data-goto");
+      if (target) navegarPara(target);
+    });
+  });
+
+  // LOGOUT
+  const logoutBtn = document.getElementById("logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("ifsaber_user");
+      location.reload();
+    });
+  }
 }
 
-// Inicializadores ao carregar a página
-document.addEventListener('DOMContentLoaded', () => {
+// TROCA DE TELAS
+function navegarPara(screenId) {
+  const screens = document.querySelectorAll(".screen");
+  screens.forEach((s) => s.classList.add("hidden"));
 
-    // 1. Lógica de Login
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const usuario = document.getElementById('usuario').value.trim();
-            const senha = document.getElementById('senha').value.trim();
+  const targetScreen = document.getElementById(screenId);
+  if (targetScreen) {
+    targetScreen.classList.remove("hidden");
+  }
 
-            if (usuario !== "" && senha !== "") {
-                document.getElementById('login').classList.add('hidden');
-                document.getElementById('painel').classList.remove('hidden');
-                mostrarTela('inicio');
-            } else {
-                document.getElementById('mensagemLogin थकान').textContent = "Preencha os campos corretamente!";
-            }
-        });
-    }
+  // Renderização dinâmica conforme a tela
+  if (screenId === "resultado") renderizarQuizOuResultado();
+  if (screenId === "gabarito") renderizarGabarito();
+  if (screenId === "ranking") renderizarRanking();
+}
 
-    // 2. Botão de Mostrar/Ocultar Senha
-    const toggleBtn = document.getElementById('togglePassword');
-    const senhaInput = document.getElementById('senha');
-    if (toggleBtn && senhaInput) {
-        toggleBtn.addEventListener('click', () => {
-            if (senhaInput.type === 'password') {
-                senhaInput.type = 'text';
-                toggleBtn.textContent = '◎';
-            } else {
-                senhaInput.type = 'password';
-                toggleBtn.textContent = '◉';
-            }
-        });
-    }
+function exibirPainel() {
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("painel").classList.remove("hidden");
+  navegarPara("inicio");
+}
 
-    // 3. Navegação por cliques em botões com data-goto
-    document.querySelectorAll('[data-goto]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const screen = btn.getAttribute('data-goto');
-            mostrarTela(screen);
-        });
+// RENDERIZAR QUIZ E PROCESSAR RESPOSTAS
+function renderizarQuizOuResultado() {
+  const container = document.getElementById("questionsGrid");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  BANCO_QUESTOES.forEach((q, index) => {
+    const qDiv = document.createElement("div");
+    qDiv.style.marginBottom = "16px";
+    qDiv.style.textAlign = "left";
+
+    let htmlOpcoes = "";
+    q.opcoes.forEach((opt, optIndex) => {
+      const checked = respostasUsuario[q.id] === optIndex ? "checked" : "";
+      htmlOpcoes += `
+        <label style="display:block; margin: 4px 0; cursor:pointer;">
+          <input type="radio" name="q_${q.id}" value="${optIndex}" ${checked} onchange="salvarResposta(${q.id}, ${optIndex})">
+          ${opt}
+        </label>
+      `;
     });
 
-    // 4. Navegação pelo Menu Lateral
-    document.querySelectorAll('.side-nav button[data-screen]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const screen = btn.getAttribute('data-screen');
-            mostrarTela(screen);
-        });
-    });
+    qDiv.innerHTML = `<strong>${q.pergunta}</strong><div>${htmlOpcoes}</div>`;
+    container.appendChild(qDiv);
+  });
 
-    // 5. Botão de Logout / Sair
-    const logoutBtn = document.getElementById('logout');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            document.getElementById('painel').classList.add('hidden');
-            document.getElementById('login').classList.remove('hidden');
-            document.getElementById('usuario').value = '';
-            document.getElementById('senha').value = '';
-        });
+  // Botão de Finalizar
+  const btnFinalizar = document.createElement("button");
+  btnFinalizar.className = "primary";
+  btnFinalizar.style.marginTop = "10px";
+  btnFinalizar.innerText = "Finalizar e Calcular Resultado";
+  btnFinalizar.onclick = calcularResultado;
+  container.appendChild(btnFinalizar);
+}
+
+window.salvarResposta = function (qId, optIndex) {
+  respostasUsuario[qId] = optIndex;
+};
+
+// CALCULAR DESEMPENHO REAL
+function calcularResultado() {
+  let acertos = 0;
+  let erros = 0;
+
+  BANCO_QUESTOES.forEach((q) => {
+    if (respostasUsuario[q.id] !== undefined) {
+      if (respostasUsuario[q.id] === q.correta) {
+        acertos++;
+      } else {
+        erros++;
+      }
     }
+  });
 
-    // 6. Preencher Grid de Questões na tela de Resultado (20 questões)
-    const questionsGrid = document.getElementById('questionsGrid');
-    if (questionsGrid) {
-        questionsGrid.innerHTML = '';
-        mockGabarito.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'question';
-            const corClasse = item.status === 'ok' ? 'green' : 'red';
-            div.innerHTML = `${item.q} <span class="answer ${corClasse}">${item.sua}</span>`;
-            questionsGrid.appendChild(div);
-        });
-    }
+  const total = BANCO_QUESTOES.length;
+  const percentual = Math.round((acertos / total) * 100);
 
-    // 7. Preencher Tabela de Gabarito
-    const answerBody = document.getElementById('answerBody');
-    if (answerBody) {
-        answerBody.innerHTML = '';
-        mockGabarito.forEach(item => {
-            const tr = document.createElement('tr');
-            if (item.status === 'ok') {
-                tr.innerHTML = `
-                    <td>Questão ${item.q}</td>
-                    <td><span class="answer green" style="margin:0 auto;">${item.sua}</span></td>
-                    <td><span class="answer green" style="margin:0 auto;">${item.correta}</span></td>
-                    <td><span class="status ok">Correta</span></td>
-                `;
-            } else {
-                tr.innerHTML = `
-                    <td>Questão ${item.q}</td>
-                    <td><span class="answer red" style="margin:0 auto;">${item.sua}</span></td>
-                    <td><span class="answer green" style="margin:0 auto;">${item.correta}</span></td>
-                    <td><span class="status no">Incorreta</span></td>
-                `;
-            }
-            answerBody.appendChild(tr);
-        });
-    }
+  // Atualiza os dados na tela
+  const statsDiv = document.querySelector(".stats");
+  if (statsDiv) {
+    statsDiv.innerHTML = `
+      <div class="stat main-stat"><div class="donut"><span>${percentual}%</span></div><div><h2>${percentual}%</h2><p>de acertos</p></div></div>
+      <div class="stat"><span class="icon correct">✓</span><div><h3>${acertos}</h3><p>acertos</p></div></div>
+      <div class="stat"><span class="icon wrong">×</span><div><h3>${erros}</h3><p>erros</p></div></div>
+      <div class="stat"><span class="icon unanswered">−</span><div><h3>${total - (acertos + erros)}</h3><p>não respondidas</p></div></div>
+    `;
+  }
 
-    // 8. Preencher Tabela de Ranking
-    const rankingBody = document.getElementById('rankingBody');
-    if (rankingBody) {
-        function renderRanking(filtro) {
-            rankingBody.innerHTML = '';
-            let dados = mockRanking;
-            if (filtro && filtro !== 'Geral') {
-                dados = mockRanking.filter(r => r.turma === filtro);
-            }
+  alert(`Quiz Finalizado! Você acertou ${acertos} de ${total} questões (${percentual}%).`);
+};
 
-            dados.forEach((item, index) => {
-                const tr = document.createElement('tr');
-                let medalhaOuPos = `<span class="rank-number">${index + 1}º</span>`;
-                if (index === 0) medalhaOuPos = `<span class="medal">🥇</span>`;
-                if (index === 1) medalhaOuPos = `<span class="medal">🥈</span>`;
-                if (index === 2) medalhaOuPos = `<span class="medal">🥉</span>`;
+// GABARITO DINÂMICO
+function renderizarGabarito() {
+  const tbody = document.getElementById("answerBody");
+  if (!tbody) return;
 
-                tr.innerHTML = `
-                    <td>${medalhaOuPos}</td>
-                    <td><span class="student-name"><span class="avatar">👤</span>${item.nome}</span></td>
-                    <td>${item.turma}</td>
-                    <td class="score">${item.acertos}/20</td>
-                    <td class="percent">${item.pct}</td>
-                    <td><span class="row-arrow">›</span></td>
-                `;
-                rankingBody.appendChild(tr);
-            });
-        }
+  tbody.innerHTML = "";
+  BANCO_QUESTOES.forEach((q) => {
+    const respUser = respostasUsuario[q.id] !== undefined ? q.opcoes[respostasUsuario[q.id]] : "Não respondida";
+    const respCorreta = q.opcoes[q.correta];
+    const acertou = respostasUsuario[q.id] === q.correta;
 
-        renderRanking('Geral');
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>Questão ${q.id}</td>
+      <td>${respUser}</td>
+      <td>${respCorreta}</td>
+      <td class="status ${acertou ? "ok" : "no"}">${acertou ? "✓ Correta" : "× Incorreta"}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
 
-        const rankingFilter = document.getElementById('rankingFilter');
-        if (rankingFilter) {
-            rankingFilter.addEventListener('change', (e) => {
-                renderRanking(e.target.value);
-            });
-        }
-    }
-});
+// RANKING DINÂMICO
+function renderizarRanking() {
+  const tbody = document.getElementById("rankingBody");
+  if (!tbody) return;
+
+  const usuario = localStorage.getItem("ifsaber_user") || "Aluno IFMA";
+
+  tbody.innerHTML = `
+    <tr><td>1º</td><td>Ana Clara</td><td>2º ano - B</td><td>4/4</td><td>100%</td></tr>
+    <tr><td>2º</td><td>Carlos Eduardo</td><td>2º ano - A</td><td>4/4</td><td>100%</td></tr>
+    <tr style="background: var(--green-light); font-weight: bold;">
+      <td>3º</td><td>${usuario} (Você)</td><td>2º ano - B</td><td>Calculado</td><td>Dinamico</td>
+    </tr>
+    <tr><td>4º</td><td>João Pedro</td><td>2º ano - C</td><td>2/4</td><td>50%</td></tr>
+  `;
+}
